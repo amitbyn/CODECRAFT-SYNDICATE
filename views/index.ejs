@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome <% if (user) { %><%= user.username %><% } else { %>Guest<% } %>!</h1>
+    <% if (!user) { %>
+        <a href="/login">Login</a>
+    <% } else { %>
+        <a href="/logout">Logout</a>
+    <% } %>
+</body>
+</html>
