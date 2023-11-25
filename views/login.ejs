@@ -1,22 +1,125 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    .bg-image {
+      background-image: url('/1.png'); 
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: blur(8px);
+      -webkit-filter: blur(8px);
+      position: fixed;
+      width: 100%;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 40%; 
+      z-index: 1;
+    }
+    form div {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type='text'], input[type='password'], input[type='submit'] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    input[type='submit'] {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    input[type='submit']:hover {
+      background-color: #0056b3;
+    }
+
+    nav {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+    }
+
+    .nav-link {
+      background-color: #007bff;
+      color: white;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 3px;
+      margin-left: 5px;
+    }
+
+    .nav-link:hover {
+      background-color: #0056b3;
+    }
+
+    .back-button {
+      display: block;
+      margin: 20px 0;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      color: #0056b3;
+    }
+    
+  </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/login" method="post">
-        <div>
-            <label>Username:</label>
-            <input type="text" name="username"/>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password"/>
-        </div>
-        <div>
-            <input type="submit" value="Log In"/>
-        </div>
-    </form>
+  <div class="bg-image"></div> <!-- Background image -->
+
+  <div class="content-container">
+    <nav>
+      <a href="/register" class="nav-link">Register</a>
+    </nav>
+    <a href="/" class="back-button">&#x2190; Back</a>
+    <div class="container">
+      <h1>Login</h1>
+      <form action="/login" method="post">
+          <div>
+              <label>Username:</label>
+              <input type="text" name="username"/>
+          </div>
+          <div>
+              <label>Password:</label>
+              <input type="password" name="password"/>
+          </div>
+          <div>
+              <input type="submit" value="Log In"/>
+          </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
