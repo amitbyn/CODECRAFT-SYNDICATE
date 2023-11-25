@@ -6,17 +6,17 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
+const port = 5000; 
 
-// User data - this should be in a database in a real app
-const users = [
+// User data - In-memory storage (not persistent)
+let users = [
     { id: 1, username: 'user1', password: 'password1' },
-    // Add more users here
 ];
 
 // Configure passport
 passport.use(new LocalStrategy(
     (username, password, done) => {
-        let user = users.find((user) => user.username === username && user.password === password);
+        let user = users.find(user => user.username === username && user.password === password);
         if (user) {
             return done(null, user);
         } else {
@@ -30,18 +30,28 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-    let user = users.find((user) => user.id === id);
+    let user = users.find(user => user.id === id);
     done(null, user);
 });
 
-// Set view engine
-app.set('view engine', 'ejs');
-
 // Middleware
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// View engine setup
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Authentication check middleware
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 // Routes
 app.get('/', (req, res) => {
@@ -52,17 +62,42 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.post('/login', 
-    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' })
-);
+app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
 app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+    req.logout(function(err) {
+        if (err) {
+            // Handle error
+            console.error('Logout error:', err);
+            return res.status(500).send('Error while logging out');
+        }
+        res.redirect('/');
+    });
+});
+
+
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+app.post('/register', (req, res) => {
+    const { username, password } = req.body;
+    if (users.find(user => user.username === username)) {
+        return res.redirect('/register'); // Username exists
+    }
+    const newUser = { id: users.length + 1, username, password };
+    users.push(newUser);
+    res.redirect('/login');
+});
+
+// Protected routes example
+app.get('/protected', isAuthenticated, (req, res) => {
+    res.send('This is a protected route.');
 });
 
 // Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
