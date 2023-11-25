@@ -1,14 +1,90 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home Page</title>
+  <meta charset="utf-8">
+  <title>Home</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    .bg-image {
+      background-image: url('/1.png'); 
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: blur(8px);
+      -webkit-filter: blur(8px);
+      position: fixed;
+      width: 100%;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 50%; 
+      z-index: 1;
+    }
+
+    nav {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+    }
+
+    .nav-link {
+      background-color: #007bff;
+      color: white;
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 3px;
+      margin-left: 5px;
+    }
+
+    .nav-link:hover {
+      background-color: #0056b3;
+    }
+
+   
+  </style>
 </head>
 <body>
-    <h1>Welcome <% if (user) { %><%= user.username %><% } else { %>Guest<% } %>!</h1>
-    <% if (!user) { %>
-        <a href="/login">Login</a>
-    <% } else { %>
-        <a href="/logout">Logout</a>
-    <% } %>
+  <div class="bg-image"></div> <!-- Background image -->
+
+  <div class="content-container">
+    <nav>
+      <% if (!user) { %>
+          <a href="/login" class="nav-link">Login</a>
+          <a href="/register" class="nav-link">Register</a>
+      <% } else { %>
+          <span>Welcome, <%= user.username %></span>
+          <a href="/logout" class="nav-link">Logout</a>
+      <% } %>
+    </nav>
+
+    <div class="container">
+      <h1>Welcome to the CodeCraft Syndicate!</h1>
+      <% if (!user) { %>
+        <p>Please login or register to continue.</p>
+      <% } else { %>
+        <p>Enjoy exploring the site!</p>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>
