@@ -1,11 +1,13 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body, html {
+      font-family: 'Roboto', sans-serif;
       height: 100%;
       margin: 0;
     }
@@ -36,14 +38,15 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       text-align: center;
-      width: 50%; 
+      width: 80%; /* Adjusted for better responsiveness */
+      max-width: 800px; /* Maximum width */
       z-index: 1;
     }
 
     nav {
-      position: absolute;
-      top: 0;
-      right: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       padding: 10px;
     }
 
@@ -54,37 +57,43 @@
       text-decoration: none;
       border-radius: 3px;
       margin-left: 5px;
+      transition: background-color 0.3s;
     }
 
     .nav-link:hover {
       background-color: #0056b3;
     }
 
-   
+    @media screen and (max-width: 600px) {
+      .content-container {
+        width: 90%;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="bg-image"></div> <!-- Background image -->
+  <div class="bg-image"></div>
 
-  <div class="content-container">
-    <nav>
-      <% if (!user) { %>
-          <a href="/login" class="nav-link">Login</a>
-          <a href="/register" class="nav-link">Register</a>
-      <% } else { %>
-          <span>Welcome, <%= user.username %></span>
-          <a href="/logout" class="nav-link">Logout</a>
-      <% } %>
-    </nav>
-
-    <div class="container">
-      <h1>Welcome to the CodeCraft Syndicate!</h1>
-      <% if (!user) { %>
-        <p>Please login or register to continue.</p>
-      <% } else { %>
-        <p>Enjoy exploring the site!</p>
-      <% } %>
-    </div>
-  </div>
+  
 </body>
 </html>
+<div class="content-container">
+  <nav>
+    <% if (!user) { %>
+        <a href="/login" class="nav-link">Login</a>
+        <a href="/register" class="nav-link">Register</a>
+    <% } else { %>
+        <span>Welcome, <%= user.username %></span>
+        <a href="/logout" class="nav-link">Logout</a>
+    <% } %>
+  </nav>
+
+  <div class="container">
+    <h1>Welcome to the CodeCraft Syndicate!</h1>
+    <% if (!user) { %>
+      <p>Please login or register to continue.</p>
+    <% } else { %>
+      <p>Enjoy exploring the site!</p>
+    <% } %>
+  </div>
+</div>
