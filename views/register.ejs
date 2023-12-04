@@ -1,104 +1,118 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body, html {
+      font-family: 'Roboto', sans-serif;
       height: 100%;
       margin: 0;
     }
 
     .bg-image {
-        background-image: url('/1.png'); 
-        height: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        filter: blur(8px);
-        -webkit-filter: blur(8px);
-        position: fixed;
-        width: 100%;
-        left: 0;
-        top: 0;
-        z-index: -1;
-      }
-  
-      .content-container {
-        background-color: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(8px);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 40%; 
-        z-index: 1;
-      }
-  
-    form div {
-        margin-bottom: 15px;
-      }
-      label {
-        display: block;
-        margin-bottom: 5px;
-      }
-      input[type='text'], input[type='password'], input[type='email'], input[type='submit'] {
-        width: calc(100% - 20px);
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
-      input[type='submit'] {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-      input[type='submit']:hover {
-        background-color: #0056b3;
-      }
-      .back-button {
-        display: block;
-        margin: 20px 0;
-        color: #007bff;
-        text-decoration: none;
-      }
-      .back-button:hover {
-        color: #0056b3;
-      }
-   
+      background-image: url('/1.png');
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: blur(8px);
+      -webkit-filter: blur(8px);
+      position: fixed;
+      width: 100%;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
 
+    .content-container {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      z-index: 1;
+    }
+
+    form div {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type='text'], input[type='password'], input[type='email'], input[type='submit'] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    input[type='submit'] {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type='submit']:hover {
+      background-color: #0056b3;
+    }
+
+    .back-button {
+      display: block;
+      margin: 20px auto;
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .back-button:hover {
+      color: #0056b3;
+    }
+
+    @media screen and (max-width: 600px) {
+      .content-container {
+        width: 95%;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="bg-image"></div> <!-- Background image -->
+  <div class="bg-image"></div>
 
   <div class="content-container">
     <a href="/" class="back-button">&#x2190; Back</a>
     <div class="container">
       <h1>Register</h1>
       <form action="/register" method="post">
-          <div>
-              <label>Username:</label>
-              <input type="text" name="username" required/>
-          </div>
-          <div>
-              <label>Email:</label>
-              <input type="email" name="email" required/>
-          </div>
-          <div>
-              <label>Password:</label>
-              <input type="password" name="password" required/>
-          </div>
-          <div>
-              <input type="submit" value="Register"/>
-          </div>
+        <div>
+          <label>Username:</label>
+          <input type="text" name="username" required/>
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="email" name="email" required/>
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password" required/>
+        </div>
+        <div>
+          <input type="submit" value="Register"/>
+        </div>
       </form>
     </div>
   </div>
